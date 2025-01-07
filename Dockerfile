@@ -1,17 +1,16 @@
-# Use an official OpenJDK runtime as the base image
+FROM ubuntu:latest AS build
+
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
+
+RUN apt-get install maven -y
+RUN mvn clean install
+
 FROM openjdk:17-jdk-slim
 
-# Label the image
-LABEL authors="houda"
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the jar file of the Gateway application into the container
-COPY target/Gateway-0.0.1-SNAPSHOT.jar /app/app.jar
-
-# Expose the port used by the Gateway application
 EXPOSE 8222
 
-# Run the Gateway application
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+COPY --from=build /target/Gateway-0.0.1-SNAPSHOT.jar app.jar
+
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
