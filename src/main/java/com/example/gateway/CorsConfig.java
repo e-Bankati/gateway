@@ -17,7 +17,7 @@ public class CorsConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         // Allow Angular frontend origin
-        corsConfiguration.addAllowedOrigin("http://localhost:4200");
+        corsConfiguration.addAllowedOrigin("https://bankati-front.vercel.app");
 
         // Allow all methods
         corsConfiguration.addAllowedMethod("*");
