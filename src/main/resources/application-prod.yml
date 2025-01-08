@@ -3,12 +3,23 @@ server:
 
 eureka:
   instance:
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 90
     hostname: gateway-tyir.onrender.com
   client:
     serviceUrl:
-      defaultZone:
-        ${EUREKA_HOST:https://bankati-discovery.onrender.com/eureka/}
-    register-with-eureka: false
-    fetch-registry: false
+      defaultZone: https://bankati-discovery-latest.onrender.com/
+    fetch-registry: true
+    register-with-eureka: true
+#    preferIpAddress: false
+#    securePortEnabled: true
+#    nonSecurePortEnabled: false
+#    securePort: 443
+#    instanceId: ${spring.application.name}:${random.uuid}
+#    statusPageUrl: https://${eureka.instance.hostname}/actuator/info
+#    healthCheckUrl: https://${eureka.instance.hostname}/actuator/health
+#    homePageUrl: https://${eureka.instance.hostname}/
+#    metadataMap:
+#      instanceId: ${spring.application.name}:${random.uuid}
   server:
     enable-self-preservation: false
